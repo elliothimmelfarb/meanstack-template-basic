@@ -1,3 +1,11 @@
 {
-	"extends": "airbnb"
+	"extends": "airbnb",
+	"globals": {
+		"angular": true,
+    "before": true,
+    "describe": true,
+    "it": true,
+    "beforeEach": true,
+    "after": true
+  }
 }

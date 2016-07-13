@@ -91,54 +91,54 @@ gulp.task('js', ['clean:js'], () => {
     .pipe(sourcemaps.init('.'))
     .pipe(concat('bundle.js'))
     .pipe(babel({
-      presets: ['es2015']
+      presets: ['es2015'],
     }))
     .pipe(annotate())
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.js.output))
+    .pipe(gulp.dest(paths.js.output));
 });
-gulp.task('clean:js', () => {
-  return del([paths.js.output]);
-});
+gulp.task('clean:js', () =>
+  del([paths.js.output])
+);
 
 
 // HTML
-gulp.task('html', () => {
-  return gulp.src(paths.html.input)
+gulp.task('html', () =>
+  gulp.src(paths.html.input)
     .pipe(gulp.dest(paths.html.output))
-});
+);
 
 // PUG
-gulp.task('pug', ['clean:html', 'html'], () => {
-  return gulp.src(paths.pug.input)
+gulp.task('pug', ['clean:html', 'html'], () =>
+  gulp.src(paths.pug.input)
     .pipe(plumber())
     .pipe(pug())
-    .pipe(gulp.dest(paths.pug.output));
-})
+    .pipe(gulp.dest(paths.pug.output))
+);
 
-gulp.task('clean:html', () => {
-  return del([paths.html.output]);
-});
+gulp.task('clean:html', () =>
+  del([paths.html.output])
+);
 
 
 // CSS/SCSS
-gulp.task('css', ['clean:css'], () => {
-  return gulp.src(paths.css.input)
+gulp.task('css', ['clean:css'], () =>
+  gulp.src(paths.css.input)
     .pipe(plumber())
     .pipe(sourcemaps.init('.'))
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.css.output));
-});
+    .pipe(gulp.dest(paths.css.output))
+);
 
-gulp.task('clean:css', () => {
-  return del([paths.css.output]);
-});
+gulp.task('clean:css', () =>
+  del([paths.css.output])
+);
 
 
 // FAVICON
-gulp.task('favicon', () => {
-  return gulp.src(paths.favicon.input)
-    .pipe(gulp.dest(paths.favicon.output));
-})
+gulp.task('favicon', () =>
+  gulp.src(paths.favicon.input)
+    .pipe(gulp.dest(paths.favicon.output))
+);
