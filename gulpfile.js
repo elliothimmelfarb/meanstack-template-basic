@@ -11,8 +11,10 @@ const annotate = require('gulp-ng-annotate');
 const del = require('del');
 const sourcemaps = require('gulp-sourcemaps');
 const pug = require('gulp-pug');
+const browser = require('browser-sync');
+const eslint = require('gulp-eslint');
 
-let paths = {
+const paths = {
   js: {
     input: 'client/js/**/*.js',
     output: 'public/js'
@@ -37,16 +39,31 @@ let paths = {
 
 // RUNNERS
 
-// Without Nodemon default
-gulp.task('default', ['build', 'watch']);
-// WITH NODEMON serve
-gulp.task('nodemon', ['build', 'watch', 'serve']);
+gulp.task('default', ['build', 'watch', 'serve']);
 
 gulp.task('build', ['pug', 'css', 'js', 'favicon']);
 
 
+gulp.task('lint', () => {
+  return gulp.src(['**/*.js', '!public/**', '!node_modules/**'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+})
+
+gulp.task('watch:lint', () => {
+  gulp.watch(['**/*.js', '!public/**', '!node_modules/**'], ['lint'])
+});
+
+// BROWSER SYNC
+gulp.task('serve', ['nodemon'], () => {
+  browser.init({
+    proxy: 'http://localhost:8000',
+    files: ['public/**/*.*']
+  });
+});
+
 // nodemon
-gulp.task('serve', () => {
+gulp.task('nodemon', () => {
   nodemon({
       script: 'app.js',
       ext: 'html js',
@@ -71,14 +88,14 @@ gulp.task('watch', () => {
 gulp.task('js', ['clean:js'], () => {
   gulp.src(paths.js.input)
     .pipe(plumber())
-    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init('.'))
     .pipe(concat('bundle.js'))
     .pipe(babel({
       presets: ['es2015']
     }))
     .pipe(annotate())
     .pipe(uglify())
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.js.output))
 });
 gulp.task('clean:js', () => {
@@ -91,6 +108,7 @@ gulp.task('html', () => {
   return gulp.src(paths.html.input)
     .pipe(gulp.dest(paths.html.output))
 });
+
 // PUG
 gulp.task('pug', ['clean:html', 'html'], () => {
   return gulp.src(paths.pug.input)
@@ -98,6 +116,7 @@ gulp.task('pug', ['clean:html', 'html'], () => {
     .pipe(pug())
     .pipe(gulp.dest(paths.pug.output));
 })
+
 gulp.task('clean:html', () => {
   return del([paths.html.output]);
 });
@@ -107,11 +126,12 @@ gulp.task('clean:html', () => {
 gulp.task('css', ['clean:css'], () => {
   return gulp.src(paths.css.input)
     .pipe(plumber())
-    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init('.'))
     .pipe(sass().on('error', sass.logError))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.css.output));
 });
+
 gulp.task('clean:css', () => {
   return del([paths.css.output]);
 });

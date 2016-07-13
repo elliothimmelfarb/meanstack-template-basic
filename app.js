@@ -44,7 +44,7 @@ app.use('/api', require('./routes/api'));
 ////////////////////////////////
 
 app.get('/', (req, res) => {
-  res.render('index', {title: 'MEAN Stack Template - BASIC'});
+  res.render('index', { title: 'MEAN Stack Template - BASIC' });
 });
 
 // catch 404 and forward to error handler
