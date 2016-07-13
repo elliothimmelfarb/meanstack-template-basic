@@ -1,4 +1,4 @@
-'use strict';
+
 
 const gulp = require('gulp');
 const concat = require('gulp-concat');
@@ -17,25 +17,25 @@ const eslint = require('gulp-eslint');
 const paths = {
   js: {
     input: 'client/js/**/*.js',
-    output: 'public/js'
+    output: 'public/js',
   },
   html: {
     input: 'client/html/**/*.html',
-    output: 'public/html'
+    output: 'public/html',
   },
   pug: {
     input: 'client/html/**/*.pug',
-    output: 'public/html'
+    output: 'public/html',
   },
   css: {
     input: 'client/css/**/*.scss',
-    output: 'public/css'
+    output: 'public/css',
   },
   favicon: {
     input: 'client/favicon.ico',
-    output: 'public'
-  }
-}
+    output: 'public',
+  },
+};
 
 // RUNNERS
 
@@ -44,34 +44,34 @@ gulp.task('default', ['build', 'watch', 'serve']);
 gulp.task('build', ['pug', 'css', 'js', 'favicon']);
 
 
-gulp.task('lint', () => {
-  return gulp.src(['**/*.js', '!public/**', '!node_modules/**'])
+gulp.task('lint', () =>
+  gulp.src(['**/*.js', '!public/**', '!node_modules/**'])
     .pipe(eslint())
     .pipe(eslint.format())
-})
+);
 
-gulp.task('watch:lint', () => {
-  gulp.watch(['**/*.js', '!public/**', '!node_modules/**'], ['lint'])
+gulp.task('watch:lint', ['lint'], () => {
+  gulp.watch(['**/*.js', '!public/**', '!node_modules/**'], ['lint']);
 });
 
 // BROWSER SYNC
 gulp.task('serve', ['nodemon'], () => {
   browser.init({
     proxy: 'http://localhost:8000',
-    files: ['public/**/*.*']
+    files: ['public/**/*.*'],
   });
 });
 
 // nodemon
 gulp.task('nodemon', () => {
   nodemon({
-      script: 'app.js',
-      ext: 'html js',
-      ignore: ['./client', './public']
-    })
-    .on('restart', () => {
-      console.log('restarted!');
-    })
+    script: 'app.js',
+    ext: 'html js',
+    ignore: ['./client', './public'],
+  })
+  .on('restart', () => {
+    console.log('restarted!');
+  });
 });
 
 

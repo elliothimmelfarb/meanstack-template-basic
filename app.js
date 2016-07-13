@@ -1,4 +1,4 @@
-'use strict';
+
 
 const PORT = process.env.PORT || 8000;
 
@@ -13,15 +13,15 @@ const bodyParser = require('body-parser');
 const app = express();
 const server = http.createServer(app);
 
-let mongoose = require('mongoose');
-let mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/_______________'; // TODO: SET MONGODB URL
+const mongoose = require('mongoose');
+const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/_______________'; // TODO: SET MONGODB URL
 mongoose.connect(mongoUrl, err => {
   console.log(err || `MongoDB connected to ${mongoUrl}`);
 });
 
 server.listen(PORT, err => {
   console.log(err || `Server listening on port ${PORT}`);
-})
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,25 +36,24 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-///////// ROUTERS //////////////
+// /////// ROUTERS //////////////
 
 app.use('/api', require('./routes/api'));
 
-////////////////////////////////
+// //////////////////////////////
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'MEAN Stack Template - BASIC' });
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  let err = new Error('Not Found');
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   res.status(err.status || 500);
   res.send(err);
 });
