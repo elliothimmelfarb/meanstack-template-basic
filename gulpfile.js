@@ -47,7 +47,7 @@ gulp.task('build', ['pug/html', 'css', 'js', 'favicon']);
 
 // WATCHES
 gulp.task('watch', () => {
-  gulp.watch('client/html/**/*.pug', ['pug']);
+  gulp.watch(['client/html/**/*.pug', 'client/html/**/*.html'], ['pug/html']);
   gulp.watch('client/js/**/*.js', ['js']);
   gulp.watch('client/css/**/*.scss', ['css']);
   gulp.watch('client/*.ico', ['favicon']);

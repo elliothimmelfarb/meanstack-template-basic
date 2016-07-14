@@ -1,6 +1,6 @@
 // MODULE //////////
-
-angular
+(() => {
+  angular
   .module('myApp', [
     'ui.router',
     'oitozero.ngSweetAlert',
@@ -10,11 +10,12 @@ angular
   ])
   .config(config);
 
-function config($stateProvider, $urlRouterProvider) {
-  $stateProvider
+  function config($stateProvider, $urlRouterProvider) {
+    $stateProvider
     .state('home', {
       url: '/',
       templateUrl: '/html/home.html',
     });
-  $urlRouterProvider.otherwise('/');
-}
+    $urlRouterProvider.otherwise('/');
+  }
+})();

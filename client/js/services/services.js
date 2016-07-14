@@ -1,4 +1,7 @@
-angular.module('myApp')
-  .service('User', User);
+(() => {
+  angular
+    .module('myApp')
+    .service('User', User);
 
-function User() {}
+  function User() {}
+})();

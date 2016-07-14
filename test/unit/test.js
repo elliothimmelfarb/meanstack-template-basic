@@ -1,13 +1,11 @@
 const chai = require('chai');
-const dirtyChai = require('dirty-chai');
 const expect = chai.expect;
-chai.use(dirtyChai);
 
 describe('test', () => {
   describe('test test', () => {
     it('should pass', () => {
       expect(true).to.equal(true);
-      expect(1).to.not.equal(2);
+      expect(1).to.not.be.NaN;
     });
   });
 });
@@ -41,7 +39,7 @@ describe('test', () => {
 //   describe('.find()', () => {
 //     it('should return all chefs', done => {
 //       Chef.find({}, (err, chefs) => {
-//         expect(err).to.not.exist();
+//         expect(err).to.not.exist;
 //         expect(chefs).to.have.length(2);
 //         expect(chefs[0].name).to.equal('Paula Deen');
 //         done(err);
@@ -52,7 +50,7 @@ describe('test', () => {
 //         Chef.findOne({ name: 'Paula Deen' }, (err, chef) => {
 //           if (err) return done(err);
 //           return chef.addYear((errr, savedChef) => {
-//             expect(errr).to.not.exist();
+//             expect(errr).to.not.exist;
 //             expect(savedChef.yearsOfExperience).to.equal(11);
 //             return done();
 //           });
@@ -62,7 +60,7 @@ describe('test', () => {
 //         Chef.findOne({ name: 'Guy Fieri' }, (err, chef) => {
 //           if (err) return done(err);
 //           return chef.addYear((errr, savedChef) => {
-//             expect(errr).to.not.exist();
+//             expect(errr).to.not.exist;
 //             expect(savedChef.yearsOfExperience).to.equal(1);
 //             done();
 //           });
