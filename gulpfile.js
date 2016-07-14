@@ -38,7 +38,6 @@ const paths = {
 
 
 // RUNNERS
-
 gulp.task('default', ['build', 'watch', 'nodemon']);
 
 gulp.task('sync', ['build', 'watch', 'b-sync']);
