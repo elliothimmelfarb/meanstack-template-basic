@@ -1,7 +1,4 @@
-'use strict';
-
 angular.module('myApp')
+  .service('User', User);
 
-.service('User', function() {
-
-});
+function User() {}

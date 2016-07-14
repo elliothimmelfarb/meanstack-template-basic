@@ -1,5 +1,3 @@
-
-
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const nodemon = require('gulp-nodemon');
@@ -43,11 +41,10 @@ gulp.task('default', ['build', 'watch', 'serve']);
 
 gulp.task('build', ['pug', 'css', 'js', 'favicon']);
 
-
 gulp.task('lint', () =>
   gulp.src(['**/*.js', '!public/**', '!node_modules/**'])
-    .pipe(eslint())
-    .pipe(eslint.format())
+  .pipe(eslint())
+  .pipe(eslint.format())
 );
 
 gulp.task('watch:lint', ['lint'], () => {
@@ -74,7 +71,6 @@ gulp.task('nodemon', () => {
   });
 });
 
-
 // WATCHES
 gulp.task('watch', () => {
   gulp.watch('client/html/**/*.pug', ['pug']);
@@ -82,7 +78,6 @@ gulp.task('watch', () => {
   gulp.watch('client/css/**/*.scss', ['css']);
   gulp.watch('client/*.ico', ['favicon']);
 });
-
 
 // JS
 gulp.task('js', ['clean:js'], () => {
@@ -102,11 +97,10 @@ gulp.task('clean:js', () =>
   del([paths.js.output])
 );
 
-
 // HTML
 gulp.task('html', () =>
   gulp.src(paths.html.input)
-    .pipe(gulp.dest(paths.html.output))
+  .pipe(gulp.dest(paths.html.output))
 );
 
 // PUG
@@ -121,24 +115,22 @@ gulp.task('clean:html', () =>
   del([paths.html.output])
 );
 
-
 // CSS/SCSS
 gulp.task('css', ['clean:css'], () =>
   gulp.src(paths.css.input)
-    .pipe(plumber())
-    .pipe(sourcemaps.init('.'))
-    .pipe(sass().on('error', sass.logError))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.css.output))
+  .pipe(plumber())
+  .pipe(sourcemaps.init('.'))
+  .pipe(sass().on('error', sass.logError))
+  .pipe(sourcemaps.write('.'))
+  .pipe(gulp.dest(paths.css.output))
 );
 
 gulp.task('clean:css', () =>
   del([paths.css.output])
 );
 
-
 // FAVICON
 gulp.task('favicon', () =>
   gulp.src(paths.favicon.input)
-    .pipe(gulp.dest(paths.favicon.output))
+  .pipe(gulp.dest(paths.favicon.output))
 );

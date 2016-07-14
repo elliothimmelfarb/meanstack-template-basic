@@ -1,14 +1,13 @@
-'use strict';
-
 // MODULE //////////
 
 angular.module('myApp', ['ui.router', 'oitozero.ngSweetAlert'])
+  .config(config);
 
-.config(function($stateProvider, $urlRouterProvider){
+function config($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: '/',
       templateUrl: '/html/home.html',
-    })
+    });
   $urlRouterProvider.otherwise('/');
-});
+}
