@@ -40,6 +40,7 @@
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
+    "dirty-chai": "^1.2.2",
     "eslint": "^3.0.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-config-google": "^0.6.0",
