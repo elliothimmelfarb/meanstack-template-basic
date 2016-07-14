@@ -36,11 +36,14 @@ const paths = {
   },
 };
 
+
 // RUNNERS
 
-gulp.task('default', ['build', 'watch', 'serve']);
+gulp.task('default', ['build', 'watch', 'nodemon']);
 
-gulp.task('build', ['pug', 'css', 'js', 'favicon']);
+gulp.task('sync', ['build', 'watch', 'b-sync']);
+
+gulp.task('build', ['pug/html', 'css', 'js', 'favicon']);
 
 // WATCHES
 gulp.task('watch', () => {
@@ -74,7 +77,7 @@ gulp.task('watch:lint', ['lint'], () => {
 
 
 // BROWSER SYNC
-gulp.task('serve', ['nodemon'], () => {
+gulp.task('b-sync', ['nodemon'], () => {
   browser.init({
     proxy: 'http://localhost:8000',
     files: ['public/**/*.*'],
@@ -122,7 +125,7 @@ gulp.task('html', () =>
 );
 
 // PUG
-gulp.task('pug', ['clean:html', 'html'], () =>
+gulp.task('pug/html', ['clean:html', 'html'], () =>
   gulp.src(paths.pug.input)
     .pipe(plumber())
     .pipe(pug())

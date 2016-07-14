@@ -9,6 +9,8 @@
     "after": true
   },
 	"rules": {
-		"no-use-before-define": ["error", { "functions": false, "classes": true }]
+		"no-use-before-define": ["error", { "functions": false, "classes": true }],
+		"no-underscore-dangle": ["error", { "allow": ["_id"] }],
+		"no-param-reasign": ["error", {"props": "false"}]
 	}
 }

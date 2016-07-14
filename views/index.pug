@@ -11,14 +11,14 @@ head
   script(src="/bower_components/angular/angular.js", charset="utf-8")
   script(src="/bower_components/angular-animate/angular-animate.js", charset="utf-8")
   script(src="/bower_components/angular-touch/angular-touch.js", charset="utf-8")
-  script(src="/bower_components/ui-bootstrap/index.js", charset="utf-8")
+  script(src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js", charset="utf-8")
   script(src="/bower_components/angular-ui-router/release/angular-ui-router.js", charset="utf-8")
   script(src="/bower_components/sweetalert/dist/sweetalert.min.js", charset="utf-8")
   script(src="/bower_components/ngSweetAlert/SweetAlert.min.js", charset="utf-8")
   
   script(src="/js/bundle.js")
   
-body(ng-app='myApp', ng-controller='mainCtrl')
+body(ng-app='myApp', ng-controller='mainController')
   .container-fluid
     h1 #{title}
     ui-view
