@@ -11,6 +11,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const pug = require('gulp-pug');
 const browser = require('browser-sync');
 const eslint = require('gulp-eslint');
+const mocha = require('gulp-mocha');
 
 const paths = {
   js: {
@@ -41,6 +42,26 @@ gulp.task('default', ['build', 'watch', 'serve']);
 
 gulp.task('build', ['pug', 'css', 'js', 'favicon']);
 
+// WATCHES
+gulp.task('watch', () => {
+  gulp.watch('client/html/**/*.pug', ['pug']);
+  gulp.watch('client/js/**/*.js', ['js']);
+  gulp.watch('client/css/**/*.scss', ['css']);
+  gulp.watch('client/*.ico', ['favicon']);
+});
+
+// TESTS
+gulp.task('test', () =>
+  gulp.src('./test/**/*.js', { read: false })
+  .pipe(mocha())
+);
+
+gulp.task('testing', () =>
+  gulp.watch('./test/**/*.js', ['test'])
+);
+
+
+// LINTING
 gulp.task('lint', () =>
   gulp.src(['**/*.js', '!public/**', '!node_modules/**'])
   .pipe(eslint())
@@ -51,6 +72,7 @@ gulp.task('watch:lint', ['lint'], () => {
   gulp.watch(['**/*.js', '!public/**', '!node_modules/**'], ['lint']);
 });
 
+
 // BROWSER SYNC
 gulp.task('serve', ['nodemon'], () => {
   browser.init({
@@ -58,6 +80,7 @@ gulp.task('serve', ['nodemon'], () => {
     files: ['public/**/*.*'],
   });
 });
+
 
 // nodemon
 gulp.task('nodemon', () => {
@@ -71,13 +94,6 @@ gulp.task('nodemon', () => {
   });
 });
 
-// WATCHES
-gulp.task('watch', () => {
-  gulp.watch('client/html/**/*.pug', ['pug']);
-  gulp.watch('client/js/**/*.js', ['js']);
-  gulp.watch('client/css/**/*.scss', ['css']);
-  gulp.watch('client/*.ico', ['favicon']);
-});
 
 // JS
 gulp.task('js', ['clean:js'], () => {
@@ -93,9 +109,11 @@ gulp.task('js', ['clean:js'], () => {
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.js.output));
 });
+
 gulp.task('clean:js', () =>
   del([paths.js.output])
 );
+
 
 // HTML
 gulp.task('html', () =>
@@ -115,6 +133,7 @@ gulp.task('clean:html', () =>
   del([paths.html.output])
 );
 
+
 // CSS/SCSS
 gulp.task('css', ['clean:css'], () =>
   gulp.src(paths.css.input)
@@ -128,6 +147,7 @@ gulp.task('css', ['clean:css'], () =>
 gulp.task('clean:css', () =>
   del([paths.css.output])
 );
+
 
 // FAVICON
 gulp.task('favicon', () =>

@@ -3,6 +3,15 @@ const dirtyChai = require('dirty-chai');
 const expect = chai.expect;
 chai.use(dirtyChai);
 
+describe('test', () => {
+  describe('test test', () => {
+    it('should pass', () => {
+      expect(true).to.equal(true);
+      expect(1).to.not.equal(2);
+    });
+  });
+});
+
 // const mongoose = require('mongoose');
 //
 // const Chef = require('../../models/chef');

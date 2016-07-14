@@ -2,6 +2,6 @@
 angular.module('myApp')
   .controller('mainController', mainController);
 
-function mainController($scope) {
+function mainController() {
   console.log('mainCtrl!');
 }
