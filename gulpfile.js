@@ -122,9 +122,9 @@ gulp.task('html', () =>
   gulp.src(paths.html.input)
   .pipe(gulp.dest(paths.html.output))
 );
-
+// TODO: FIX PUG/HTML CONCURRENCY ISSUE
 // PUG
-gulp.task('pug/html', ['clean:html', 'html'], () =>
+gulp.task('pug/html', ['clean:html'], () =>
   gulp.src(paths.pug.input)
     .pipe(plumber())
     .pipe(pug())

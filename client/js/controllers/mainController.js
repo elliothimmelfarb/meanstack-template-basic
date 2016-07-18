@@ -4,9 +4,9 @@
     .module('myApp')
     .controller('mainController', mainController);
 
-  function mainController() {
+  function mainController($scope) {
     console.log('mainCtrl!');
-    const vm = this; // viewmodel capture controllerAs with vm Y032
+    const vm = $scope; // viewmodel capture controllerAs with vm Y032
     vm.name = 'mainController';
   }
 })();
