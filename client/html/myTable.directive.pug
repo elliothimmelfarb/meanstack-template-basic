@@ -1,0 +1,14 @@
+h1 {{myTable.name}}
+table.table
+  thead
+    tr
+      th(ng-repeat='key in myTable.keys' ng-click='myTable.sortKey = key; myTable.sortReverse = !myTable.sortReverse') 
+        span {{ key }}
+        span(ng-if='key === myTable.sortKey')
+          span(ng-if='myTable.sortReverse') ⬇
+          span(ng-if='!myTable.sortReverse') ⬆
+  tbody
+    tr(ng-repeat='item in myTable.list | orderBy : myTable.sortKey : myTable.sortReverse track by $index')
+      td(ng-repeat='key in myTable.keys') {{item[key]}}
+
+          
