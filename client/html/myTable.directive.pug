@@ -9,6 +9,6 @@ table.table
           span(ng-if='!myTable.sortReverse') ⬆
   tbody
     tr(ng-repeat='item in myTable.list | orderBy : myTable.sortKey : myTable.sortReverse track by $index')
-      td(ng-repeat='key in myTable.keys') {{item[key]}}
+      td(my-draggable ng-repeat='key in myTable.keys') {{item[key]}}
 
           

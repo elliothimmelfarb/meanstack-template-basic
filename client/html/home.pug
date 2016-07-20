@@ -1,3 +1,4 @@
 .container-fluid
-  h1 Home!
+  input(type='text' ng-model='color')
+  h1(my-text-color='{{color}}' my-draggable) Home!
   my-table(list='main.tacos')
